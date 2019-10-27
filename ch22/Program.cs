@@ -17,6 +17,7 @@ namespace ch22
         static Dictionary<string, CmdInfo> commands = new Dictionary<string, CmdInfo>()
         {
             {"--mutex", new CmdInfo() { Command = (o) => { OneAtATimePlease.Run(); }}},
+            {"--sem", new CmdInfo() { Command = (o) => { SemDemo.TryToGetIn(); }}},
             //{"--downprog", new CmdInfo() { CommandAsync = async (o) => { await HttpClientProgress.RunAsync(); }}},
         };
 
