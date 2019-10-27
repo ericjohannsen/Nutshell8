@@ -18,6 +18,8 @@ namespace ch22
         {
             {"--mutex", new CmdInfo() { Command = (o) => { OneAtATimePlease.Run(); }}},
             {"--sem", new CmdInfo() { Command = (o) => { SemDemo.TryToGetIn(); }}},
+            {"--eventwait", new CmdInfo() { Command = (o) => { EventWait.AwaitSignal(); }}},
+            {"--eventsignal", new CmdInfo() { Command = (o) => { EventWait.SendSignal(); }}},
             //{"--downprog", new CmdInfo() { CommandAsync = async (o) => { await HttpClientProgress.RunAsync(); }}},
         };
 
