@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252" />
+<link rel="stylesheet" type="text/css" href="http://www.albahari.com/nutshell/styles.css">
+<link rel="stylesheet" type="text/css" href="styles.css" /><link rel="stylesheet" type="text/css" media="print" href="print.css" />
+    <script type="text/javascript" src="sh_main.min.js"></script>
+    <script type="text/javascript" src="sh_csharp.js"></script>
+    <link type="text/css" rel="stylesheet" href="sh_style.css" />
+    <!--[if IE 6]>
+    <link href="ie.css" rel="stylesheet" type="text/css" media="screen" />
+    <![endif]-->
+    <!--[if IE 7]>
+    <link href="ie7.css" rel="stylesheet" type="text/css" media="screen" />
+    <![endif]-->
+<title>
+	C# 7.0 in a Nutshell - Code Listings
+</title></head>
+<body onload="sh_highlightDocument();">
+    <form name="aspnetForm" method="post" action="./code.aspx" id="aspnetForm">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKMjEwNDQyMTMxMw8WAh4TVmFsaWRhdGVSZXF1ZXN0TW9kZQIBFgJmD2QWAgIDD2QWAgILDxYCHgRUZXh0BZ0UDQo8dHI+DQogICAgPHRkIGFsaWduPSJjZW50ZXIiIHZhbGlnbj0idG9wIj4NCiAgICAgICAgPHRhYmxlIHdpZHRoPSI5MCUiIGNlbGxwYWRkaW5nPSIwIiBjZWxsc3BhY2luZz0iMCIgY2xhc3M9InNpZGVsaW5rIj4NCiAgICAgICAgICAgIDx0cj4NCiAgICAgICAgICAgICAgICA8dGQgYWxpZ249ImxlZnQiIHZhbGlnbj0iYm90dG9tIj4NCiAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9ImFuaW1hbHNtYWxsLnBuZyIgYWx0PSIiIC8+DQogICAgICAgICAgICAgICAgPC90ZD4NCiAgICAgICAgICAgICAgICA8dGQgYWxpZ249InJpZ2h0IiB2YWxpZ249ImJvdHRvbSI+DQogICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPSJzaWRlbGluayIgaHJlZj0iYWJvdXQuYXNweCI+QWJvdXQgdGhlIEJvb2s8L2E+DQogICAgICAgICAgICAgICAgPC90ZD4NCiAgICAgICAgICAgIDwvdHI+DQogICAgICAgIDwvdGFibGU+DQogICAgPC90ZD4NCjwvdHI+DQo8dHI+DQogICAgPHRkIGFsaWduPSJjZW50ZXIiIHZhbGlnbj0idG9wIj4NCiAgICAgICAmbmJzcDsNCiAgICA8L3RkPg0KPC90cj4NCjx0cj4NCiAgICA8dGQgYWxpZ249ImNlbnRlciIgdmFsaWduPSJ0b3AiPg0KICAgICAgICA8dGFibGUgd2lkdGg9IjkwJSIgY2VsbHBhZGRpbmc9IjAiIGNlbGxzcGFjaW5nPSIwIiBjbGFzcz0ic2lkZWxpbmsiPg0KICAgICAgICAgICAgPHRyPg0KICAgICAgICAgICAgICAgIDx0ZCBhbGlnbj0ibGVmdCIgdmFsaWduPSJib3R0b20iPg0KICAgICAgICAgICAgICAgICAgICA8aW1nIHNyYz0iYW5pbWFsc21hbGwucG5nIiBhbHQ9IiIgLz4NCiAgICAgICAgICAgICAgICA8L3RkPg0KICAgICAgICAgICAgICAgIDx0ZCBhbGlnbj0icmlnaHQiIHZhbGlnbj0iYm90dG9tIj4NCiAgICAgICAgICAgICAgICAgICAgPGEgY2xhc3M9InNpZGVsaW5rYSIgaHJlZj0iY29kZS5hc3B4Ij5Db2RlIExpc3RpbmdzPC9hPg0KICAgICAgICAgICAgICAgIDwvdGQ+DQogICAgICAgICAgICA8L3RyPg0KICAgICAgICA8L3RhYmxlPg0KICAgIDwvdGQ+DQo8L3RyPg0KPHRyPg0KICAgIDx0ZCBhbGlnbj0iY2VudGVyIiB2YWxpZ249InRvcCI+DQogICAgICAgPHRhYmxlIHdpZHRoPSI5MCUiIGNlbGxwYWRkaW5nPSIwIiBjZWxsc3BhY2luZz0iMCIgY2xhc3M9InN1YmNvbnRlbnQiPjx0cj48dGQgYWxpZ249InJpZ2h0Ij48YSBocmVmPSJjb2RlLmFzcHgiIGNsYXNzPSJzdWJsaW5rIj5DIyA3LjAgaW4gYSBOdXRzaGVsbDwvYT48L3RkPjwvdHI+DQogICAgICAgPHRyPjx0ZCBhbGlnbj0icmlnaHQiPjxhIGhyZWY9ImNvZGUuYXNweCIgY2xhc3M9InN1YmxpbmsiPkMjIDYuMCBpbiBhIE51dHNoZWxsPC9hPjwvdGQ+PC90cj4NCiAgICAgICA8dHI+PHRkIGFsaWduPSJyaWdodCI+PGEgaHJlZj0iY29kZS5hc3B4IiBjbGFzcz0ic3VibGluayI+QyMgNS4wIGluIGEgTnV0c2hlbGw8L2E+PC90ZD48L3RyPjwvdGFibGU+DQogICAgPC90ZD4NCjwvdHI+DQo8dHI+DQogICAgPHRkIGFsaWduPSJjZW50ZXIiIHZhbGlnbj0idG9wIj4NCiAgICAgICAgPHRhYmxlIHdpZHRoPSI5MCUiIGNlbGxwYWRkaW5nPSIwIiBjZWxsc3BhY2luZz0iMCIgY2xhc3M9InNpZGVsaW5rIj4NCiAgICAgICAgICAgIDx0cj4NCiAgICAgICAgICAgICAgICA8dGQgYWxpZ249ImxlZnQiIHZhbGlnbj0iYm90dG9tIj4NCiAgICAgICAgICAgICAgICAgICAgPGltZyBzcmM9ImFuaW1hbHNtYWxsLnBuZyIgYWx0PSIiIC8+DQogICAgICAgICAgICAgICAgPC90ZD4NCiAgICAgICAgICAgICAgICA8dGQgYWxpZ249InJpZ2h0IiB2YWxpZ249ImJvdHRvbSI+DQogICAgICAgICAgICAgICAgICAgIDxhIGNsYXNzPSJzaWRlbGluayIgaHJlZj0iZXh0cmFzLmFzcHgiPkV4dHJhczwvYT4NCiAgICAgICAgICAgICAgICA8L3RkPg0KICAgICAgICAgICAgPC90cj4NCiAgICAgICAgPC90YWJsZT4NCiAgICA8L3RkPg0KPC90cj4NCjx0cj4NCiAgICA8dGQgYWxpZ249ImNlbnRlciIgdmFsaWduPSJ0b3AiPg0KICAgICAgICZuYnNwOw0KICAgIDwvdGQ+DQo8L3RyPg0KPHRyPg0KICAgIDx0ZCBhbGlnbj0iY2VudGVyIiB2YWxpZ249InRvcCI+DQogICAgICAgIDx0YWJsZSB3aWR0aD0iOTAlIiBjZWxscGFkZGluZz0iMCIgY2VsbHNwYWNpbmc9IjAiIGNsYXNzPSJzaWRlbGluayI+DQogICAgICAgICAgICA8dHI+DQogICAgICAgICAgICAgICAgPHRkIGFsaWduPSJsZWZ0IiB2YWxpZ249ImJvdHRvbSI+DQogICAgICAgICAgICAgICAgICAgIDxpbWcgc3JjPSJhbmltYWxzbWFsbC5wbmciIGFsdD0iIiAvPg0KICAgICAgICAgICAgICAgIDwvdGQ+DQogICAgICAgICAgICAgICAgPHRkIGFsaWduPSJyaWdodCIgdmFsaWduPSJib3R0b20iPg0KICAgICAgICAgICAgICAgICAgICA8YSBjbGFzcz0ic2lkZWxpbmsiIGhyZWY9ImNvbnRhY3QuYXNweCI+Q29udGFjdCBBdXRob3JzPC9hPg0KICAgICAgICAgICAgICAgIDwvdGQ+DQogICAgICAgICAgICA8L3RyPg0KICAgICAgICA8L3RhYmxlPg0KICAgIDwvdGQ+DQo8L3RyPg0KPHRyPg0KICAgIDx0ZCBhbGlnbj0iY2VudGVyIiB2YWxpZ249InRvcCI+DQogICAgICAgJm5ic3A7DQogICAgPC90ZD4NCjwvdHI+ZGS/+HLWgnxADr8Qw8K9gwVwSG/e3A==" />
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="051EBD36" />
+    
+
+<div id="maincode">
+
+<h1><a name="_Introduction"></a>Code Listings</h1>
+<p>The following code listings are all copy-and-paste friendly.</p>
+
+<h2>Code Listings for C# 7/6/5 in a Nutshell</h2>
+
+<p><b>NB:</b> All code listings for Chapters 2-10, 14, 20, 22, 23 and 26 are available as interactive samples in <a href="http://www.linqpad.net">LINQPad</a>.<br />
+Go to LINQPad's samples tree view (bottom left) and click <b>Download more samples</b> to get all of the above chapters.</p>
+
+<table border="0" width="100%" id="table3">
+	<tr>
+		<td valign="top">
+		<p><a href="cs4ch11.aspx">Chapter 11: Other XML Technologies</a></p>
+		<p><a href="cs4ch12.aspx">Chapter 12: Disposal and Garbage Collection</a></p>
+		<p><a href="cs4ch13.aspx">Chapter 13: Code Contracts and Diagnostics</a></p>
+		<p><a href="cs5ch15.aspx">Chapter 15: Streams and I/O</a></p>
+		<p><a href="cs5ch16.aspx">Chapter 16: Networking</a></p>
+		<p><a href="cs4ch16.aspx">Chapter 17: Serialization</a></p>
+		</td>
+		<td valign="top">
+		<p><a href="cs4ch17.aspx">Chapter 18: Assemblies</a></p>
+		<p><a href="cs4ch18.aspx">Chapter 19: Reflection and Metadata</a></p>
+		<p><a href="cs4ch19.aspx">Chapter 20: Dynamic Programming</a></p>
+		<p><a href="cs4ch20.aspx">Chapter 21: Security</a></p>
+		<p><a href="cs4ch24.aspx">Chapter 24: Application Domains</a></p>
+		<p><a href="cs4ch25.aspx">Chapter 25: Native Interop</a></p>
+		</td>
+	</tr>
+</table>
+
+
+<h2>Code Listings for C# 4.0 in a Nutshell</h2>
+
+<table border="0" width="100%" id="table2">
+	<tr>
+		<td valign="top">
+		<p><a href="cs4ch07.aspx">Chapter 7: Collections</a></p>
+		<p><a href="cs4ch11.aspx">Chapter 11: Other XML Technologies</a></p>
+		<p><a href="cs4ch12.aspx">Chapter 12: Disposal and Garbage Collection</a></p>
+		<p><a href="cs4ch13.aspx">Chapter 13: Code Contracts and Diagnostics</a></p>
+		<p><a href="cs4ch14.aspx">Chapter 14: Streams and I/O</a></p>
+		<p><a href="cs4ch15.aspx">Chapter 15: Networking</a></p>
+		<p><a href="cs4ch16.aspx">Chapter 16: Serialization</a></p>
+		<p><a href="cs4ch17.aspx">Chapter 17: Assemblies</a></p>
+		</td>
+		<td valign="top">
+		<p><a href="cs4ch18.aspx">Chapter 18: Reflection and Metadata</a></p>
+		<p><a href="cs4ch19.aspx">Chapter 19: Dynamic Programming</a></p>
+		<p><a href="cs4ch20.aspx">Chapter 20: Security</a></p>
+		<p><a href="cs4ch21.aspx">Chapter 21: Threading</a></p>
+		<p><a href="cs4ch22.aspx">Chapter 22: Parallel Programming</a></p>
+		<p><a href="cs4ch23.aspx">Chapter 23: Asynchronous Methods</a></p>
+		<p><a href="cs4ch24.aspx">Chapter 24: Application Domains</a></p>
+		<p><a href="cs4ch25.aspx">Chapter 25: Native Interop</a></p>
+		</td>
+	</tr>
+</table>
+
+<p><b>Code from chapters 2-10, 19, 22 and 26 is available within <a href="http://www.linqpad.net">LINQPad</a>.<br />
+    </b></p>
+
+<h2>Code Listings for C# 3.0 in a Nutshell</h2>
+
+<table border="0" width="100%" id="table1">
+	<tr>
+		<td valign="top">
+		<p><a href="ch01.aspx">Chapter 1: Introducing C# and the .NET Framework</a></p>
+		<p><a href="ch02.aspx">Chapter 2: C# Language Basics</a></p>
+		<p><a href="ch03.aspx">Chapter 3: Creating Types in C#</a></p>
+		<p><a href="ch04.aspx">Chapter 4: Advanced C#</a></p>
+		<p><a href="ch06.aspx">Chapter 6: Framework Fundamentals</a></p>
+		<p><a href="ch07.aspx">Chapter 7: Collections</a></p>
+		<p><a href="ch08.aspx">Chapter 8: LINQ Queries</a></p>
+		<p><a href="ch09.aspx">Chapter 9: LINQ Operators</a></p>
+		<p><a href="ch10.aspx">Chapter 10: LINQ to XML</a></p>
+		<p><a href="ch11.aspx">Chapter 11: Other XML Technologies</a></p>
+		<p><a href="ch13.aspx">Chapter 13: Streams and I/O</a></p>
+		</td>
+		<td valign="top">
+		<p><a href="ch14.aspx">Chapter 14: Networking</a></p>
+		<p><a href="ch15.aspx">Chapter 15: Serialization</a></p>
+		<p><a href="ch16.aspx">Chapter 16: Assemblies</a></p>
+		<p><a href="ch17.aspx">Chapter 17: Reflection and Metadata</a></p>
+		<p><a href="ch18.aspx">Chapter 18: Security</a></p>
+		<p><a href="ch19.aspx">Chapter 19: Threading</a></p>
+		<p><a href="ch20.aspx">Chapter 20: Asynchronous Methods</a></p>
+		<p><a href="ch21.aspx">Chapter 21: Application Domains</a></p>
+		<p><a href="ch22.aspx">Chapter 22: Integrating with Native DLLs</a></p>
+		<p><a href="ch23.aspx">Chapter 23: Diagnostics</a></p>
+		<p><a href="ch24.aspx">Chapter 24: Regular Expressions</a></p>
+		</td>
+	</tr>
+</table>
+<p style="text-align:left">
+&nbsp;</p>
+<p style="text-align:left">
+<b><a href="http://www.albahari.com/nutshell/code.zip">Download all as zip file</a></b></p>
+
+</div>
+
+
+    <p>
+        &nbsp;</p>
+    <p>
+        <span style="font-size: 80%">© 2007-2017, Joe Albahari, Ben Albahari and O'Reilly Media,
+            Inc. All rights reserved</span></p>
+    <div id="side">
+        
+            <table width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                    <td align="center" valign="top">
+                        <a href="http://www.albahari.com/nutshell/">
+                            <img src="animal.png" alt="C# 7.0 in a Nutshell" />
+                        </a>
+                    </td>
+                </tr>
+            </table>
+            <div class="shadow">
+                <div class="shadowinner">
+                    <table width="100%" cellpadding="0" cellspacing="0"
+                        border="0" class="sidetable">
+                        <tr>
+                            <td align="center" valign="middle">
+                                <a href="http://www.albahari.com/nutshell/">
+                                    <img src="cs50.png" alt="C# 7.0" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle" style="background: #BF2C19">
+                                <a href="http://www.albahari.com/nutshell/">
+                                    <img src="inanutshell.jpg" alt="in a Nutshell" />
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="middle">
+                                <a href="http://www.albahari.com/nutshell/">
+                                    <img src="authors.png" alt="Joseph Albahari &amp; Ben Albahari" />
+                                </a>
+                            </td>
+                        </tr>
+                       
+                        
+<tr>
+    <td align="center" valign="top">
+        <table width="90%" cellpadding="0" cellspacing="0" class="sidelink">
+            <tr>
+                <td align="left" valign="bottom">
+                    <img src="animalsmall.png" alt="" />
+                </td>
+                <td align="right" valign="bottom">
+                    <a class="sidelink" href="about.aspx">About the Book</a>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center" valign="top">
+       &nbsp;
+    </td>
+</tr>
+<tr>
+    <td align="center" valign="top">
+        <table width="90%" cellpadding="0" cellspacing="0" class="sidelink">
+            <tr>
+                <td align="left" valign="bottom">
+                    <img src="animalsmall.png" alt="" />
+                </td>
+                <td align="right" valign="bottom">
+                    <a class="sidelinka" href="code.aspx">Code Listings</a>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center" valign="top">
+       <table width="90%" cellpadding="0" cellspacing="0" class="subcontent"><tr><td align="right"><a href="code.aspx" class="sublink">C# 7.0 in a Nutshell</a></td></tr>
+       <tr><td align="right"><a href="code.aspx" class="sublink">C# 6.0 in a Nutshell</a></td></tr>
+       <tr><td align="right"><a href="code.aspx" class="sublink">C# 5.0 in a Nutshell</a></td></tr></table>
+    </td>
+</tr>
+<tr>
+    <td align="center" valign="top">
+        <table width="90%" cellpadding="0" cellspacing="0" class="sidelink">
+            <tr>
+                <td align="left" valign="bottom">
+                    <img src="animalsmall.png" alt="" />
+                </td>
+                <td align="right" valign="bottom">
+                    <a class="sidelink" href="extras.aspx">Extras</a>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center" valign="top">
+       &nbsp;
+    </td>
+</tr>
+<tr>
+    <td align="center" valign="top">
+        <table width="90%" cellpadding="0" cellspacing="0" class="sidelink">
+            <tr>
+                <td align="left" valign="bottom">
+                    <img src="animalsmall.png" alt="" />
+                </td>
+                <td align="right" valign="bottom">
+                    <a class="sidelink" href="contact.aspx">Contact Authors</a>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<tr>
+    <td align="center" valign="top">
+       &nbsp;
+    </td>
+</tr>
+                    </table>
+                </div>
+            </div>
+            <div style="margin-top: 0.5em">
+                <table>
+                    <tr>
+                        <td>
+                            <a href="http://www.albahari.com/nutshell/amazon">
+                                <img src="amazon.gif" alt="Buy from amazon.com" />
+                            </a>
+                        </td>
+                        <td>
+                            Available now
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        
+    </div>
+    </form>
+</body>
+</html>
