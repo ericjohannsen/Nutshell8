@@ -30,6 +30,11 @@ namespace ch22
 
         static async Task Main(string[] args)
         {
+            HighResTimer.PrintTime();
+            var res = HighResTimer.Resolution();
+            Console.WriteLine(res);
+            return;
+
             string cmd = ""; // You can hard-code a command and option while testing
             string opt = "";
 
