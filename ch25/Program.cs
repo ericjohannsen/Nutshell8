@@ -1,116 +1,80 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Threading.Tasks;
 namespace ch25
 {
     class Program
     {
-        [DllImport("libc")]
-        private static extern string getcwd(StringBuilder buf, int size);
 
-        [DllImport("libc")]
-        private static extern int mkdir (string filename, int mode);
-        // Ensure GTK is installed:
-        // sudo apt install libgtk-3-dev
-        [DllImport("libgtk-x11-2.0.so.0")]
-        private static extern void gtk_init(ref int argc, ref IntPtr argv);
-        [DllImport("libgtk-x11-2.0.so.0")]
-        static extern IntPtr gtk_message_dialog_new(IntPtr parent_window, int flags, int type, int bt, string msg, IntPtr args);
-        //static extern IntPtr gtk_message_dialog_new(IntPtr parent_window, DialogFlags flags, MessageType type, ButtonsType bt, string msg, IntPtr args);
-        [DllImport("libgtk-x11-2.0.so.0")]
-        static extern int gtk_dialog_run(IntPtr raw);
-        [DllImport("libgtk-x11-2.0.so.0")]
-        static extern void gtk_widget_destroy(IntPtr widget);
-        [Flags]
-        public enum DialogFlags
+        class CmdInfo
         {
-            Modal = 1,
-            DestroyWithParent = 2,
+            public Action<string> Command { get; set; }
+            public Func<string, Task> CommandAsync { get; set; }
+            public bool IsWindowsOnly { get; set; }
+        }
+        static Dictionary<string, CmdInfo> commands = new Dictionary<string, CmdInfo>()
+        {
+            {"--cwd", new CmdInfo() { Command = (o) => { Dir.Cwd(); }}},
+            {"--ls", new CmdInfo() { Command = (o) => { Dir.List(); }}},
+            {"--mkdir", new CmdInfo() { Command = (o) => { Dir.MkDirInTmp(); }}},
+            {"--dialog", new CmdInfo() { Command = (o) => { Gtk.DialogBox(); }}},
+            //{"--downprog", new CmdInfo() { CommandAsync = async (o) => { await HttpClientProgress.RunAsync(); }}},
+        };
+
+        static void Help()
+        {
+            Console.WriteLine(string.Join(Environment.NewLine, commands.Keys.OrderBy(c => c)));
         }
 
-        public enum MessageType
+        static async Task Main(string[] args)
         {
-            Info,
-            Warning,
-            Question,
-            Error,
-            Other,
+            string cmd = ""; // You can hard-code a command and option while testing
+            string opt = "";
+
+            if (cmd == "")
+            {
+                if (args.Length == 0)
+                {
+                    bool seekingHelp = false;
+                    do
+                    {
+                        seekingHelp = false;
+                        Console.WriteLine("Please enter an argument and option to specify which code to run.");
+                        var input = Console.ReadLine().Split(' ');
+                        cmd = input[0];
+                        if (cmd == "--help" || cmd == "-h")
+                        {
+                            seekingHelp = true;
+                            Help();
+                        }
+                        if (input.Length > 1) opt = string.Join(' ', input.Skip(1));
+                    } while (seekingHelp);
+                }
+                else
+                {
+                    cmd = args[0];
+                    if (args.Length > 1) opt = string.Join(' ', args.Skip(1));
+                }
+            }
+
+            if (commands.TryGetValue(cmd, out CmdInfo cmdInfo))
+            {
+                if (cmdInfo.IsWindowsOnly && !RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    Console.WriteLine("This command is Windows-only.");
+                    return;
+                }
+
+                if (cmdInfo.CommandAsync != null)
+                    await cmdInfo.CommandAsync(opt);
+                else
+                    cmdInfo.Command(opt);
+            }
+            else Help();
         }
 
-        public enum ButtonsType
-        {
-            None,
-            Ok,
-            Close,
-            Cancel,
-            YesNo,
-            OkCancel,
-        }
 
-        private delegate int DirClbk(string fName, StatClass stat, int typeFlag);
-
-        //[DllImport("libc.so.6")]
-        [DllImport("libc")]
-        private static extern int ftw(string dirpath, DirClbk cl, int descriptors);
-
-        private static int DirInfoCallback(string fName, StatClass stat, int typeFlag)
-        {
-            Console.WriteLine($"{fName} {stat.Blocks} blocks {stat.Size} bytes");
-            return 0;
-        }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public class StatClass
-    {
-        public uint DeviceID;
-        public uint InodeNumber;
-        public uint Mode;
-        public uint HardLinks;
-        public uint UserID;
-        public uint GroupID;
-        public uint SpecialDeviceID;
-        public ulong Size;
-        public ulong BlockSize;
-        public uint Blocks;
-        public long TimeLastAccess;
-        public long TimeLastModification;
-        public long TimeLastStatusChange;
-    }        
-
-        public static void Main(string[] args)
-        {
-            ftw("/tmp", DirInfoCallback, 10);
-        }        
-
-        static void Mainx(string[] args)
-        {
-            // 384 decimal = 600 octal, or rw- --- --- permissions
-            //Console.WriteLine($"Exit code: {MkDir("/tmp/nutMade", 384)}");
-            Console.WriteLine(Cwd());
-        }
-
-        static string Cwd()
-        {
-            StringBuilder sb = new StringBuilder(256);
-            return getcwd(sb, sb.Capacity);
-        }
-
-        static int MkDir(string filename, int mode)
-        {
-            return mkdir (filename, mode);
-        }
-        static void DialogBox()
-        {
-            var argc = 0;
-            var argv = IntPtr.Zero;
-            gtk_init(ref argc, ref argv);
-            var diag =
-                gtk_message_dialog_new(IntPtr.Zero,
-                    //DialogFlags.Modal, MessageType.Info, ButtonsType.Ok,
-                    1, 0, 1,
-                    "Hello from .NET Core", IntPtr.Zero);
-            var res = gtk_dialog_run(diag);
-            gtk_widget_destroy(diag);
-        }
     }
 }
