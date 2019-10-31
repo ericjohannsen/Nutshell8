@@ -10,43 +10,44 @@ namespace ch25
         private static extern string getcwd(StringBuilder buf, int size);
 
         [DllImport("libc")]
-        private static extern int mkdir (string filename, int mode);
+        private static extern int mkdir(string filename, int mode);
 
         //[DllImport("libc.so.6")]
         [DllImport("libc")]
         private static extern int ftw(string dirpath, DirClbk cl, int maxFileDescriptorsToUse);
 
         [StructLayout(LayoutKind.Sequential)]
-        public class StatClass_ORIG
+        struct timespec
         {
-            public uint DeviceID;
-            public uint InodeNumber;
-            public uint Mode;
-            public uint HardLinks;
-            public uint UserID;
-            public uint GroupID;
-            public uint SpecialDeviceID;
-            public ulong Size;
-            public ulong BlockSize;
-            public uint Blocks;
-            public long TimeLastAccess;
-            public long TimeLastModification;
-            public long TimeLastStatusChange;
-        }        
+            long tv_sec;                 /* seconds */
+            long tv_nsec;                /* nanoseconds */
+        };
+
         [StructLayout(LayoutKind.Sequential)]
-        public class StatClass // Shortened for book formatting
+        unsafe struct stat
         {
-            public uint DeviceID, InodeNumber, Mode, HardLinks, UserID, GroupID, SpecialDeviceID;
-            public ulong Size, BlockSize, Blocks;
-            public long TimeLastAccess, TimeLastModification, TimeLastStatusChange;
-        }        
+            public ulong st_dev;             /* Device.  */
+            public ulong st_ino;             /* File serial number.  */
+            public ulong st_nlink;         /* Link count.  */
+            public uint st_mode;           /* File mode.  */
+            public uint st_uid;            /* User ID of the file's owner. */
+            public uint st_gid;            /* Group ID of the file's group.*/
+            int __pad0;
+            public ulong st_rdev;           /* Device number, if device.  */
+            public uint st_size;            /* Size of file, in bytes. (might be __off64_t) */
+            public ulong st_blksize;     /* Optimal block size for I/O.  */
+            public ulong st_blocks;      /* Number 512-byte blocks allocated. (might be __blkcnt64_t) */
+            public timespec st_atim;            /* Time of last access.  */
+            public timespec st_mtim;            /* Time of last modification.  */
+            public timespec st_ctim;            /* Time of last status change.  */
+            fixed ulong __glibc_reserved[3];
+        };
 
+        private delegate int DirClbk(string fName, ref stat stat, int typeFlag);
 
-        private delegate int DirClbk(string fName, StatClass stat, int typeFlag);
-
-        private static int DirEntryCallback(string fName, StatClass stat, int typeFlag)
+        private static int DirEntryCallback(string fName, ref stat stat, int typeFlag)
         {
-            Console.WriteLine($"{fName} {stat.Blocks} blocks {stat.Size} bytes");
+            Console.WriteLine($"{fName} - {stat.st_size} bytes");
             return 0;
         }
 
@@ -54,6 +55,7 @@ namespace ch25
         {
             var maxFileDescriptorsToUse = 0;
             ftw("/tmp", DirEntryCallback, maxFileDescriptorsToUse);
+            Console.WriteLine($"Struct size expected 144, have: {Marshal.SizeOf(typeof(stat))}");
         }
         static public string Cwd()
         {
@@ -69,7 +71,7 @@ namespace ch25
         }
         static int MkDir(string filename, int mode)
         {
-            return mkdir (filename, mode);
+            return mkdir(filename, mode);
         }
 
     }
