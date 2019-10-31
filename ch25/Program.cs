@@ -16,6 +16,7 @@ namespace ch25
         }
         static Dictionary<string, CmdInfo> commands = new Dictionary<string, CmdInfo>()
         {
+            {"--time", new CmdInfo() { Command = (o) => { Time.SystemTime(); }}},
             {"--cwd", new CmdInfo() { Command = (o) => { Dir.Cwd(); }}},
             {"--ls", new CmdInfo() { Command = (o) => { Dir.List(); }}},
             {"--mkdir", new CmdInfo() { Command = (o) => { Dir.MkDirInTmp(); }}},
